@@ -111,3 +111,13 @@ vite.config.ts.timestamp-*
 *.swo
 .DS_Store
 Thumbs.db
+
+
+
+# ========================
+# Mini mémoire fille / documents FILES
+# ========================
+
+mini_memoire
+Capture d'écran 2025-10-01 220736.png
+Projet MLOps.pdf
