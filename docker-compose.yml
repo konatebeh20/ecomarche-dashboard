@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: ecomarche-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - DATABASE_URL=sqlite:///./ecomarche.db
+    restart: always
+
+  frontend:
+    build: ./frontend
+    container_name: ecomarche-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: always

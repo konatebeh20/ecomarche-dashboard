@@ -1,0 +1,87 @@
+<div class="container mt-4">
+  <h2>Gestion des Produits</h2>
+
+  <div class="card mb-4">
+    <div class="card-header bg-success text-white">
+      <h5 class="mb-0">Filtres</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="searchTerm" class="form-label">Recherche</label>
+          <input
+            type="text"
+            class="form-control"
+            id="searchTerm"
+            [(ngModel)]="searchTerm"
+            (input)="applyFilters()"
+            placeholder="Rechercher par nom ou catégorie">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="categoryFilter" class="form-label">Catégorie</label>
+          <select
+            class="form-select"
+            id="categoryFilter"
+            [(ngModel)]="categoryFilter"
+            (change)="applyFilters()">
+            <option value="">Toutes les catégories</option>
+            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3 d-flex align-items-end">
+          <button class="btn btn-secondary" (click)="resetFilters()">Réinitialiser les filtres</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header bg-success text-white">
+      <h5 class="mb-0">Liste des Produits</h5>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nom</th>
+              <th>Catégorie</th>
+              <th>Stock</th>
+              <th>Prix unitaire</th>
+              <th>Fournisseur</th>
+              <th>Date de péremption</th>
+              <th>Jours restants</th>
+              <th>Statut</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let produit of filteredProduits">
+              <td>{{ produit.id }}</td>
+              <td>{{ produit.nom }}</td>
+              <td>{{ produit.categorie }}</td>
+              <td>{{ produit.stock }}</td>
+              <td>{{ produit.prix_unitaire | number:'1.0-0' }} FCFA</td>
+              <td>{{ produit.fournisseur }}</td>
+              <td>{{ produit.date_peremption ? (produit.date_peremption | date:'dd/MM/yyyy') : '' }}</td>
+              <td [ngClass]="getExpiryClass(produit.date_peremption)">
+                {{ produit.date_peremption ? (calculateDaysUntilExpiry(produit.date_peremption) + ' jours') : '' }}
+              </td>
+              <td>
+                <span class="badge" [ngClass]="{'bg-success': produit.statut === 'En stock',
+                                              'bg-warning': produit.statut === 'Stock bas',
+                                              'bg-danger': produit.statut === 'Rupture'}">
+                  {{ produit.statut }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="filteredProduits.length === 0" class="alert alert-info mt-3">
+        Aucun produit ne correspond aux critères de recherche.
+      </div>
+    </div>
+  </div>
+</div>

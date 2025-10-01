@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+// Using Sass module system instead of deprecated @import
+// Use the Bootstrap Sass module entrypoint. This requires Dart Sass (used by Angular CLI).
+@use 'bootstrap' as *;
+
+:root {
+  --primary-color: #4caf50;
+  --secondary-color: #2e7d32;
+  --accent-color: #8bc34a;
+  --warning-color: #ff9800;
+  --danger-color: #f44336;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f5f5;
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  
+  &:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+  }
+}
+
+.text-success {
+  color: var(--primary-color) !important;
+}
+
+.bg-success {
+  background-color: var(--primary-color) !important;
+}
+
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

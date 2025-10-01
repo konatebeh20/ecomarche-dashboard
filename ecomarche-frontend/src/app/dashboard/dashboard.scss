@@ -1,0 +1,27 @@
+.modal-content { border-radius: 6px; }
+.modal-header { border-bottom: 1px solid #e9ecef; }
+.modal-body { padding: 1rem; }
+.modal-footer { border-top: 1px solid #e9ecef; }
+
+/* Bootstrap-like backdrop & modal helper styles */
+.modal {
+	background: transparent;
+}
+.modal.show {
+	background: rgba(0,0,0,0.5);
+}
+.modal-dialog-centered {
+	display: flex;
+	align-items: center;
+	min-height: calc(100% - 1rem);
+}
+
+/* Simple toast for success notifications */
+.dm-toast {
+	position: fixed;
+	right: 16px;
+	bottom: 16px;
+	z-index: 2000;
+	min-width: 220px;
+}
+.dm-toast .toast-body { background: #28a745; color: #fff; padding: 12px 16px; border-radius: 4px; }

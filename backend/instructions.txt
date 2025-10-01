@@ -1,0 +1,35 @@
+# Créer et activer un environnement virtuel (venv)
+
+    ## créer l'environnement virtuel
+    python -m venv venv
+
+    ## activer l'environnement (Windows PowerShell)
+    .\venv\Scripts\Activate.ps1
+
+    ## si tu es dans CMD classique
+    .\venv\Scripts\activate.bat
+
+    ## si tu es sous Linux/Mac
+    source venv/bin/activate
+
+# Installer Flask et dépendances
+    Flask
+    Flask-CORS
+    Flask-Migrate
+    Flask-RESTful
+    SQLAlchemy
+
+    pip install Flask Flask-Cors Flask-Migrate Flask-RESTful Flask-SQLAlchemy
+
+    ## Si tu as déjà un requirements.txt, installe tout d’un coup :
+    pip install -r requirements.txt
+
+# Initialiser la base de données
+    
+    flask db init
+    flask db migrate -m "init db"
+    flask db upgrade
+
+# Lancer le backend
+
+    python app.py
