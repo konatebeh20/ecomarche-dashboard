@@ -64,8 +64,8 @@ def serve_frontend(path):
         <html>
             <head><title>EcoMarché Dashboard</title></head>
             <body>
-                <h1>🛒 EcoMarché Dashboard - Backend API</h1>
-                <p>API Flask REST active ✅</p>
+                <h1> EcoMarché Dashboard - Backend API</h1>
+                <p>API Flask REST active </p>
                 <h2>Endpoints disponibles :</h2>
                 <ul>
                     <li><a href="/api/produits/all">/api/produits/all</a> - Liste des produits</li>
