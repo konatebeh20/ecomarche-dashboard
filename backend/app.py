@@ -2,7 +2,7 @@
 Application principale EcoMarché pour la réduction du gaspillage alimentaire
 """
 import os
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, send_from_directory
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_restful import Api
@@ -41,6 +41,46 @@ api.add_resource(ProduitsApi, '/api/produits/<string:route>', endpoint='produits
 
 # ML risks endpoints
 api.add_resource(RisquesApi, '/api/risques/<string:route>', endpoint='risques_reco', methods=["GET"])
+
+
+
+
+# Servir le frontend Angular s'il existe
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_frontend(path):
+    frontend_path = '../ecomarche-frontend/dist/ecomarche-frontend'
+    
+    if os.path.exists(frontend_path):
+        # Si le fichier existe, le servir
+        if path != "" and os.path.exists(os.path.join(frontend_path, path)):
+            return send_from_directory(frontend_path, path)
+        else:
+            # Sinon servir index.html (routing Angular)
+            return send_from_directory(frontend_path, 'index.html')
+    else:
+        # Si pas de frontend, page d'accueil simple
+        return '''
+        <html>
+            <head><title>EcoMarché Dashboard</title></head>
+            <body>
+                <h1>🛒 EcoMarché Dashboard - Backend API</h1>
+                <p>API Flask REST active ✅</p>
+                <h2>Endpoints disponibles :</h2>
+                <ul>
+                    <li><a href="/api/produits/all">/api/produits/all</a> - Liste des produits</li>
+                    <li><a href="/api/kpi/overview">/api/kpi/overview</a> - KPIs globaux</li>
+                    <li><a href="/api/kpi/waste_recommendations">/api/kpi/waste_recommendations</a> - Recommandations</li>
+                    <li><a href="/api/sales/summary">/api/sales/summary</a> - Ventes</li>
+                </ul>
+                <p><em>Frontend Angular non disponible - mode API uniquement</em></p>
+            </body>
+        </html>
+        '''
+
+
+
+
 
 @app.route('/api/risques/predict/<int:produit_id>')
 def api_predict_risk(produit_id):
